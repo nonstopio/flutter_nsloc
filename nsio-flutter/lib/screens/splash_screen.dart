@@ -1,14 +1,13 @@
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:nsio_flutter/common_widgets/app_screen_mixin.dart';
+import 'package:nsio_flutter/screens/location/location_screen.dart';
 import 'package:nsio_flutter/utils/app_constants.dart';
 import 'package:nsio_flutter/utils/app_logs.dart';
 import 'package:nsio_flutter/utils/app_routes.dart';
 import 'package:nsio_flutter/utils/assets.dart';
 import 'package:nsio_flutter/utils/screens.dart';
 import 'package:nsio_flutter/utils/sizes.dart';
-
-import 'home/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -37,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen>
   _redirectUser() {
     Future.delayed(
       AppConstants.splashDelay,
-      () => AppRoutes.makeFirst(context, HomeScreen()),
+      () => AppRoutes.makeFirst(context, MyMap()),
     );
   }
 

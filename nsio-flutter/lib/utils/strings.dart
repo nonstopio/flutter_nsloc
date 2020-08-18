@@ -7,6 +7,8 @@ class Strings {
 
   static String get crashFinalTitle => "Abnormal Behavior!";
 
+  static String get searchPlace => "Search Place";
+
   static String get crashFinalMessage =>
       "It looks like the App is behaving abnormally. We have notified our engineering team about it, and you should get an update soon.\nWe apologize for the inconvenience caused.";
 
