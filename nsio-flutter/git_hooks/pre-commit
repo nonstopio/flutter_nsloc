@@ -1,0 +1,12 @@
+#!/bin/bash
+
+branch_name=$(git rev-parse --abbrev-ref HEAD 2>&1)
+
+if [ $branch_name == 'master' ]
+then
+    echo "This is master branch, you cannot commit in this branch. Please checkout to your own branch and commit."
+    exit 1
+else
+    flutter format lib
+    exit 0
+fi
