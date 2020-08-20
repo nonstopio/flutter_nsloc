@@ -1,5 +1,6 @@
 ///App Strings
 ///
+
 class Strings {
   static String get isEmpty => "";
 
@@ -14,4 +15,11 @@ class Strings {
 
   static String get timeOutErrorMessage =>
       "Timeout !\n Please check if you have good internet connection!\n Try Again";
+
+  static String get timeOutMessage => "Timeout !\n Please check if you have good internet connection!\nTry again";
+
+  static String get errorOccurred => "Error Occurred!";
+
+  static String get somethingWentWrong => "Something Went Wrong!";
+
 }
