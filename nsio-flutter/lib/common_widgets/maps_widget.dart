@@ -8,17 +8,14 @@ class SelectPredictionWidget extends StatelessWidget {
   final PlacePrediction placePrediction;
   final Function onTap;
 
-  const SelectPredictionWidget(
-      {Key key, @required this.placePrediction, this.onTap})
-      : super(key: key);
+  const SelectPredictionWidget({Key key, @required this.placePrediction, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding:
-        EdgeInsets.symmetric(horizontal: Sizes.s15, vertical: Sizes.s10),
+        padding: EdgeInsets.symmetric(horizontal: Sizes.s15, vertical: Sizes.s10),
         margin: EdgeInsets.only(top: Sizes.s4),
         decoration: BoxDecoration(
           border: Border.all(
@@ -55,17 +52,14 @@ class ImageLocationPredictionWidget extends StatelessWidget {
   final PlacePrediction placePrediction;
   final Function onTap;
 
-  const ImageLocationPredictionWidget(
-      {Key key, @required this.placePrediction, this.onTap})
-      : super(key: key);
+  const ImageLocationPredictionWidget({Key key, @required this.placePrediction, this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding:
-        EdgeInsets.symmetric(horizontal: Sizes.s15, vertical: Sizes.s10),
+        padding: EdgeInsets.symmetric(horizontal: Sizes.s15, vertical: Sizes.s10),
         margin: EdgeInsets.symmetric(vertical: Sizes.s8),
         decoration: BoxDecoration(
           border: Border.all(
@@ -124,8 +118,7 @@ class SelectPredictionWithDescriptionWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        padding:
-        EdgeInsets.symmetric(horizontal: Sizes.s15, vertical: Sizes.s10),
+        padding: EdgeInsets.symmetric(horizontal: Sizes.s15, vertical: Sizes.s10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

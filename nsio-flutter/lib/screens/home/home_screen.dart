@@ -7,8 +7,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with AppScreenMixin<HomeScreen>, ScreenLoader<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with AppScreenMixin<HomeScreen>, ScreenLoader<HomeScreen> {
   @override
   void initState() {
     super.initState();

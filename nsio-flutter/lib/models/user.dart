@@ -38,8 +38,7 @@ class User implements AppModel {
         id: data.getInt(APIKeys.id),
         name: data.getString(APIKeys.name),
         marks: data.getDouble(APIKeys.marks),
-        knowLanguages: List<String>.from(
-            data.getList<String>(APIKeys.knowLanguages).map((e) => e).toList()),
+        knowLanguages: List<String>.from(data.getList<String>(APIKeys.knowLanguages).map((e) => e).toList()),
       );
     } catch (e, s) {
       errorLogs("User.fromMap Exception : $e\n$s");

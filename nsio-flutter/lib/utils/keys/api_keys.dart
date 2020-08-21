@@ -6,7 +6,7 @@ class APIKeys {
   static const String name = "name";
   static const String marks = "marks";
   static const String knowLanguages = "knowLanguages";
- // static const String googleMapsAPIKey = "AIzaSyA18odJnD-pDsu7EVJ7WiXVM5sVvpjAQxw";
+  static const String googleMapsAPIKey = "AIzaSyA18odJnD-pDsu7EVJ7WiXVM5sVvpjAQxw";
   static const String data = "data";
 }
 

@@ -29,8 +29,7 @@ class Auth {
   ///
   Future<Null> saveUser() async {
     appLogs("Saves [currentUser]");
-    SPService.instance
-        .setString(SPKeys.userData, getJsonFromMap(currentUser.toMap()));
+    SPService.instance.setString(SPKeys.userData, getJsonFromMap(currentUser.toMap()));
     currentUser.log();
   }
 

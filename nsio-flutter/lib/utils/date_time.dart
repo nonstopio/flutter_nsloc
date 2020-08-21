@@ -42,8 +42,7 @@ String formatDateFromString({
     DateFormat dateFormatter = DateFormat(format);
     return dateFormatter.format(tempDateTime);
   } catch (e, s) {
-    appLogs(
-        " formatDateFromString--> format:$format  dateTime:$dateTime : $e\n$s");
+    appLogs(" formatDateFromString--> format:$format  dateTime:$dateTime : $e\n$s");
   }
   return emptyDateString;
 }
@@ -56,8 +55,7 @@ String formatDateFromDateTime({
     DateFormat dateFormatter = DateFormat(format);
     return dateFormatter.format(dateTime);
   } catch (e, s) {
-    appLogs(
-        " formatDateFromDateTime --> format$format  dateTime:$dateTime : $e\n$s");
+    appLogs(" formatDateFromDateTime --> format$format  dateTime:$dateTime : $e\n$s");
   }
   return emptyDateString;
 }

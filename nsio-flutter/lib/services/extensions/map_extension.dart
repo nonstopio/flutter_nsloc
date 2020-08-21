@@ -19,8 +19,7 @@ extension Interpreter on Map {
     if (data == null) {
       data = {};
     }
-    if (data.containsKey(key)) if (data[key] is bool)
-      return this[key] ?? defaultBool;
+    if (data.containsKey(key)) if (data[key] is bool) return this[key] ?? defaultBool;
     errorLogs("Map.getBool[$key] has incorrect data : $this");
     return defaultBool;
   }
@@ -62,8 +61,7 @@ extension Interpreter on Map {
     if (data == null) {
       data = {};
     }
-    if (data.containsKey(key)) if (data[key] is String)
-      return data[key] ?? defaultString;
+    if (data.containsKey(key)) if (data[key] is String) return data[key] ?? defaultString;
     errorLogs("Map.getString[$key] has incorrect data : $this");
     return defaultString;
   }
@@ -77,8 +75,7 @@ extension Interpreter on Map {
     if (data == null) {
       data = {};
     }
-    if (data.containsKey(key)) if (data[key] is List<T>)
-      return data[key] ?? <T>[];
+    if (data.containsKey(key)) if (data[key] is List<T>) return data[key] ?? <T>[];
     errorLogs("Map.getString[$key] has incorrect data : $this");
 
     return <T>[];
@@ -86,6 +83,5 @@ extension Interpreter on Map {
 
   ///Add value to map if value is not null
   ///
-  T add<T>({@required String key, @required T value}) =>
-      this.putIfAbsent(key, () => value);
+  T add<T>({@required String key, @required T value}) => this.putIfAbsent(key, () => value);
 }

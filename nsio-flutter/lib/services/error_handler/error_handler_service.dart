@@ -7,8 +7,7 @@ import 'package:nsio_flutter/utils/strings.dart';
 class ErrorHandlerService {
   static ErrorHandlerService instance = ErrorHandlerService();
 
-  Future<void> appRecordError(dynamic exception, StackTrace stack,
-      {dynamic context}) async {
+  Future<void> appRecordError(dynamic exception, StackTrace stack, {dynamic context}) async {
     String errorTitle;
 
     if (exception is PlatformException) {
@@ -16,7 +15,6 @@ class ErrorHandlerService {
     } else {
       errorTitle = Strings.crashFinalTitle;
     }
-    errorLogs(
-        'ErrorHandlerService $errorTitle \nexception: $exception \n stack: $stack \n context: context');
+    errorLogs('ErrorHandlerService $errorTitle \nexception: $exception \n stack: $stack \n context: context');
   }
 }

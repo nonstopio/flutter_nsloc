@@ -35,6 +35,8 @@ dependencies:
 
   dio: ^3.0.10
   geopoint: ^0.7.1
+  android_intent: ^0.3.7+2
+
 
 dev_dependencies:
   flutter_test:

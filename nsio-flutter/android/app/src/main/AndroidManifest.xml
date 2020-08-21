@@ -11,9 +11,9 @@
         android:label="nsio_flutter"
         android:icon="@mipmap/ic_launcher">
 
-      <!--  <meta-data
+        <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyA18odJnD-pDsu7EVJ7WiXVM5sVvpjAQxw" />-->
+            android:value="AIzaSyA18odJnD-pDsu7EVJ7WiXVM5sVvpjAQxw" />
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

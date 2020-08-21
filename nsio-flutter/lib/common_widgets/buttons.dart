@@ -36,8 +36,7 @@ class AppButton extends StatelessWidget {
     return InkWell(
       onTap: enabled ? onTap : () {},
       child: Container(
-        padding: padding ??
-            EdgeInsets.symmetric(horizontal: Sizes.s25, vertical: Sizes.s15),
+        padding: padding ?? EdgeInsets.symmetric(horizontal: Sizes.s25, vertical: Sizes.s15),
         margin: margin ?? EdgeInsets.zero,
         child: Text(
           title,
@@ -45,9 +44,7 @@ class AppButton extends StatelessWidget {
           textAlign: textAlign ?? TextAlign.center,
         ),
         decoration: BoxDecoration(
-            color: enabled
-                ? (color ?? AppColors.primaryColor)
-                : AppColors.primaryColor,
+            color: enabled ? (color ?? AppColors.primaryColor) : AppColors.primaryColor,
             boxShadow: boxShadow
                 ? [
                     BoxShadow(

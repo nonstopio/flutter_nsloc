@@ -1,14 +1,13 @@
-# Flutter template for Nonstop IO Technologies
-
-A Flutter project template  application.
-
 ## Note:
-This version is compatible with Flutter `v1.12.13+hotfix.9 `
+This version is compatible with Flutter `v1.17.1`
 
-## Initialize:
-run command `./initialise.bash -o <organization name> -n <project name>`
+## Info:
+This POC includes Google map location picker in which user can search location which will get displayed on map.
 
-eg: `./initialise.bash -o nonstopio -n ble_poc`
+## Features
+1. Display current location on a google map
+2. Search location and display it on a google map
 
-## WARNING:
-### DON'T RUN `initialise.bash` WHILE DEVELOPING THIS TEMPLATE AS YOU WILL LOOSE GIT REFERENCE AND OTHER CHANGES.
+##Libraries Used
+1. Geolocator - Used to get lat long of current location
+2. google_maps_flutter - To display map
