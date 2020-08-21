@@ -11,6 +11,22 @@ dependencies:
   flutter:
     sdk: flutter
 
+  #UI
+  flutter_screenutil: ^2.3.1
+  screen_loader: ^2.0.1
+
+  #UTILS
+  after_layout: ^1.0.7+2
+  intl: 0.16.1
+
+  #LOCATION
+  geolocator: ^5.3.2+2
+  google_maps_flutter: ^0.5.30
+
+  dio: ^3.0.10
+  geopoint: ^0.7.1
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

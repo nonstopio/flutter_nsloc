@@ -1,21 +1,19 @@
+library location_picker;
+
 import 'dart:async';
 
-import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:nsio_flutter/common_widgets/maps_widget.dart';
-import 'package:nsio_flutter/common_widgets/ui_helper_widgets.dart';
-import 'package:nsio_flutter/models/google_map_model.dart';
-import 'package:nsio_flutter/screens/location/google_maps_service.dart';
-import 'package:nsio_flutter/utils/app_constants.dart';
-import 'package:nsio_flutter/utils/methods.dart';
+import 'package:location_picker/common_widgets/maps_widget.dart';
+import 'package:location_picker/models/google_map_model.dart';
+import 'package:location_picker/services/google_maps_service.dart';
+import 'package:location_picker/utils/app_constants.dart';
+import 'package:location_picker/utils/sizes.dart';
+import 'package:location_picker/utils/strings.dart';
 import 'package:screen_loader/screen_loader.dart';
 
-import '../../utils/app_logs.dart';
-import '../../utils/sizes.dart';
-import '../../utils/strings.dart';
 
 class MyMap extends StatefulWidget {
   final googleMapsKey;
@@ -50,7 +48,7 @@ class MyMapState extends State<MyMap> with ScreenLoader<MyMap> {
     _cameraPosition = CameraPosition(target: LatLng(AppConstants.latitude, AppConstants.longitude), zoom: AppConstants.zoomValue);
     _searchTextController.addListener(_onSearchChanged);
     _getCurrentLocation();
-    appLogs("LocationScreen");
+    print("LocationScreen");
   }
 
   @override
@@ -61,8 +59,8 @@ class MyMapState extends State<MyMap> with ScreenLoader<MyMap> {
   }
 
   _getLocationResults(String input) async {
-    _placePredictionList = await GoogleMapService.getPlacePrediction(context, input: input);
-    appLogs("getLocationResults ${_placePredictionList.length}");
+    _placePredictionList = await GoogleMapService.getPlacePrediction(context, input: input,googleMapsAPIKey: widget.googleMapsKey);
+    print("getLocationResults ${_placePredictionList.length}");
     if (_placePredictionList.length >= 1) {
       setState(() {
         _showSearchSuggestions = true;
@@ -92,7 +90,7 @@ class MyMapState extends State<MyMap> with ScreenLoader<MyMap> {
     try {
       final Geolocator geolocator = Geolocator()..forceAndroidLocationManager = true;
       position = await geolocator.getLastKnownPosition(desiredAccuracy: LocationAccuracy.high);
-      appLogs(position.latitude);
+      print(position.latitude);
     } on PlatformException {
       position = null;
     }
@@ -108,7 +106,7 @@ class MyMapState extends State<MyMap> with ScreenLoader<MyMap> {
       _latLong = new LatLng(position.latitude, position.longitude);
       _cameraPosition = CameraPosition(target: _latLong, zoom: AppConstants.zoomValue);
       if (_googleMapController != null) _googleMapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
-      appLogs(_searchTextController.toString());
+      print(_searchTextController.toString());
       _markers.add(Marker(
         markerId: MarkerId("ID"),
         position: _latLong,
@@ -118,7 +116,7 @@ class MyMapState extends State<MyMap> with ScreenLoader<MyMap> {
   }
 
   _getCurrentAddress(Position position) async {
-    _address = await GoogleMapService.getAddress(context, LatLng(position.latitude, position.longitude));
+    _address = await GoogleMapService.getAddress(context, LatLng(position.latitude, position.longitude),widget.googleMapsKey);
   }
 
   @override
@@ -145,7 +143,7 @@ class MyMapState extends State<MyMap> with ScreenLoader<MyMap> {
                   setState(() {});
                 },
                 onCameraIdle: () async {
-                  _address = await GoogleMapService.getAddress(context, _latLong);
+                  _address = await GoogleMapService.getAddress(context, _latLong, widget.googleMapsKey);
                   setState(() {});
                 },
                 onMapCreated: (GoogleMapController controller) {
@@ -166,7 +164,10 @@ class MyMapState extends State<MyMap> with ScreenLoader<MyMap> {
                       padding: EdgeInsets.all(Sizes.s20),
                       child: Text(_address.isEmpty ? Strings.unnamedPlace : _address),
                     ),
-                    C10(),
+                    SizedBox(
+                      width: Sizes.s10,
+                      height: Sizes.s10,
+                    ),
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
@@ -189,40 +190,40 @@ class MyMapState extends State<MyMap> with ScreenLoader<MyMap> {
                           ),
                           children: _placePredictionList
                               .map((placePrediction) => SelectPredictionWidget(
-                                    placePrediction: placePrediction,
-                                    onTap: () async {
-                                      startLoading();
-                                      setFocus(context);
-                                      setState(() {
-                                        _showSearchSuggestions = false;
-                                      });
-                                      PlaceDetails placeDetails = await GoogleMapService.getPlaceDetails(context, placeId: placePrediction.placeId);
-                                      setState(() {
-                                        _markers.clear();
-                                        _markers.add(
-                                          Marker(
-                                            markerId: MarkerId(placePrediction.placeId),
-                                            position: LatLng(placeDetails.location.latitude, placeDetails.location.longitude),
-                                            icon: BitmapDescriptor.defaultMarkerWithHue(AppConstants.markerBitmapDescriptor),
-                                            infoWindow: InfoWindow(title: placeDetails.name, snippet: placeDetails.formattedAddress),
-                                          ),
-                                        );
-                                        _address = placeDetails.formattedAddress;
-                                      });
-                                      await _googleMapController?.animateCamera(
-                                        CameraUpdate.newCameraPosition(
-                                          CameraPosition(
-                                            target: LatLng(
-                                              placeDetails.location.latitude,
-                                              placeDetails.location.longitude,
-                                            ),
-                                            zoom: AppConstants.afterZoomValue,
-                                          ),
-                                        ),
-                                      );
-                                      stopLoading();
-                                    },
-                                  ))
+                            placePrediction: placePrediction,
+                            onTap: () async {
+                              startLoading();
+                              FocusScope.of(context);
+                              setState(() {
+                                _showSearchSuggestions = false;
+                              });
+                              PlaceDetails placeDetails = await GoogleMapService.getPlaceDetails(context, placeId: placePrediction.placeId,googleMapsAPIKey: widget.googleMapsKey);
+                              setState(() {
+                                _markers.clear();
+                                _markers.add(
+                                  Marker(
+                                    markerId: MarkerId(placePrediction.placeId),
+                                    position: LatLng(placeDetails.location.latitude, placeDetails.location.longitude),
+                                    icon: BitmapDescriptor.defaultMarkerWithHue(AppConstants.markerBitmapDescriptor),
+                                    infoWindow: InfoWindow(title: placeDetails.name, snippet: placeDetails.formattedAddress),
+                                  ),
+                                );
+                                _address = placeDetails.formattedAddress;
+                              });
+                              await _googleMapController?.animateCamera(
+                                CameraUpdate.newCameraPosition(
+                                  CameraPosition(
+                                    target: LatLng(
+                                      placeDetails.location.latitude,
+                                      placeDetails.location.longitude,
+                                    ),
+                                    zoom: AppConstants.afterZoomValue,
+                                  ),
+                                ),
+                              );
+                              stopLoading();
+                            },
+                          ))
                               .toList(),
                         ),
                       ),

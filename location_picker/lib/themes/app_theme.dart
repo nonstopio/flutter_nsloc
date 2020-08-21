@@ -1,8 +1,8 @@
 library theme;
 
 import 'package:flutter/material.dart';
-import 'package:nsio_flutter/themes/app_colors.dart';
 
+import 'app_colors.dart';
 import 'app_textstyles.dart';
 
 export '../utils/assets.dart';

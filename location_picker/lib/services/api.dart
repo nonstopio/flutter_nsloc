@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:nsio_flutter/utils/app_constants.dart';
-import 'package:nsio_flutter/utils/app_logs.dart';
-import 'package:nsio_flutter/utils/keys/api_keys.dart';
-import 'package:nsio_flutter/utils/strings.dart';
+import 'package:location_picker/utils/app_constants.dart';
+import 'package:location_picker/utils/keys/api_keys.dart';
+import 'package:location_picker/utils/strings.dart';
 
 Future<Map<String, dynamic>> getDataFromGETAPI({
   @required String apiName,
@@ -25,8 +24,8 @@ Future<Map<String, dynamic>> getDataFromGETAPI({
     'Accept': 'application/json',
   };
 
-  if (logEnabled) apiLogs("getDataFromGETAPI : $apiName with URL = $url");
-  if (logEnabled) apiLogs("getDataFromGETAPI : $requestHeaders with requestHeaders  = $requestHeaders");
+  if (logEnabled) print("getDataFromGETAPI : $apiName with URL = $url");
+  if (logEnabled) print("getDataFromGETAPI : $requestHeaders with requestHeaders  = $requestHeaders");
 
   try {
     Dio dio = new Dio();
@@ -42,17 +41,17 @@ Future<Map<String, dynamic>> getDataFromGETAPI({
           }),
     )
         .catchError((onError) {
-      if (logEnabled) apiLogs("getDataFromGETAPI : $apiName has Error");
+      if (logEnabled) print("getDataFromGETAPI : $apiName has Error");
 
       errorFlag = true;
     }).timeout(new Duration(seconds: timeOutSecond), onTimeout: () async {
-      if (logEnabled) apiLogs("getDataFromGETAPI : $apiName has TimeOut ");
+      if (logEnabled) print("getDataFromGETAPI : $apiName has TimeOut ");
       timeOutFlag = true;
       return null;
     }).then((response) {
       if (response != null && !timeOutFlag && !errorFlag) {
-        if (logEnabled) apiLogs("getDataFromGETAPI : $apiName has Response statusCode:${response.statusCode}");
-        if (logEnabled) apiLogs("getDataFromGETAPI : $apiName has Response body:${response.data}");
+        if (logEnabled) print("getDataFromGETAPI : $apiName has Response statusCode:${response.statusCode}");
+        if (logEnabled) print("getDataFromGETAPI : $apiName has Response body:${response.data}");
         try {
           if (response.data is Map) {
             responseData = response.data;
@@ -60,26 +59,26 @@ Future<Map<String, dynamic>> getDataFromGETAPI({
             responseData.putIfAbsent(APIKeys.data, () => response.data);
           }
         } catch (e, s) {
-          if (logEnabled) apiLogs("getDataFromGETAPI : $apiName has Response Exception:$e \n $s");
+          if (logEnabled) print("getDataFromGETAPI : $apiName has Response Exception:$e \n $s");
           responseData = Map();
         }
         responseData.putIfAbsent("statusCode", () => response.statusCode);
       }
     });
   } catch (exception, stackTrace) {
-    if (logEnabled) apiLogs(exception);
-    if (logEnabled) apiLogs(stackTrace);
+    if (logEnabled) print(exception);
+    if (logEnabled) print(stackTrace);
   }
 
   if (errorFlag) {
-    if (logEnabled) apiLogs("getDataFromGETAPI : $apiName Show Error");
+    if (logEnabled) print("getDataFromGETAPI : $apiName Show Error");
 
     responseData.clear();
 
     responseData.putIfAbsent("statusCode", () => errorStatusCode);
     responseData.putIfAbsent("message", () => Strings.somethingWentWrong);
   } else if (timeOutFlag) {
-    if (logEnabled) apiLogs("getDataFromGETAPI : $apiName Show TimeOut $timeOutFlag");
+    if (logEnabled) print("getDataFromGETAPI : $apiName Show TimeOut $timeOutFlag");
 
     responseData.clear();
 
@@ -99,7 +98,7 @@ Future<Map<String, dynamic>> getDataFromGETAPI({
       apiData.putIfAbsent("statusCode", () => statusCode);
       apiData.putIfAbsent("message", () => responseData['message']);
     } catch (e) {
-      if (logEnabled) apiLogs("getDataFromGETAPI : analytics error");
+      if (logEnabled) print("getDataFromGETAPI : analytics error");
     }
     /* --------AppAnalytics-----------   */
 

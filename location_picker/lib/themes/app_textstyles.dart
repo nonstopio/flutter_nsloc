@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nsio_flutter/utils/sizes.dart';
+import 'package:location_picker/utils/sizes.dart';
 
 import 'app_colors.dart';
 

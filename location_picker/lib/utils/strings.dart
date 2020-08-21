@@ -4,10 +4,6 @@
 class Strings {
   static String get isEmpty => "";
 
-  static String get restartApp => "Restart App!";
-
-  static String get crashFinalTitle => "Abnormal Behavior!";
-
   static String get searchPlace => "Search Place";
 
   static String get unnamedPlace => "Unnamed place";

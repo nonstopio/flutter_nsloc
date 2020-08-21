@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:geopoint/geopoint.dart';
-import 'package:nsio_flutter/screens/location/google_maps_service.dart';
-import 'package:nsio_flutter/utils/app_logs.dart';
-import 'package:nsio_flutter/utils/keys/api_keys.dart';
+import 'package:location_picker/utils/keys/api_keys.dart';
 
 class PlaceDetails {
   String placeId;
@@ -13,7 +11,6 @@ class PlaceDetails {
   String url;
   String vicinity;
   String website;
-  List<String> photos;
   List<String> weekdayText;
   List<String> types;
   GeoPoint location;
@@ -27,7 +24,6 @@ class PlaceDetails {
     @required this.url,
     @required this.vicinity,
     @required this.website,
-    @required this.photos,
     @required this.weekdayText,
     @required this.types,
     @required this.location,
@@ -42,14 +38,13 @@ class PlaceDetails {
         url: "",
         vicinity: "",
         website: "",
-        photos: [],
         weekdayText: [],
         types: [],
         location: GeoPoint(latitude: 0, longitude: 0),
       );
 
   factory PlaceDetails.fromMap(Map data) {
-    apiLogs("PlaceDetails.fromMap Data : $data");
+    print("PlaceDetails.fromMap Data : $data");
     try {
       Map openingHoursData = data[GoogleMapKeys.openingHours] ?? Map();
       Map geometryData = data[GoogleMapKeys.geometry] ?? Map();
@@ -63,8 +58,6 @@ class PlaceDetails {
         url: data[GoogleMapKeys.url] ?? "",
         vicinity: data[GoogleMapKeys.vicinity] ?? "",
         website: data[GoogleMapKeys.website] ?? "",
-        photos: List.from(
-            (data[GoogleMapKeys.photos] ?? []).map((photoData) => GoogleMapAPI.getPhotoUrl(photoData[GoogleMapKeys.photoReference])).toList()),
         weekdayText: List.from(openingHoursData[GoogleMapKeys.weekdayText] ?? []),
         types: List.from(data[GoogleMapKeys.types] ?? []),
         location: GeoPoint(
@@ -73,7 +66,7 @@ class PlaceDetails {
         ),
       );
     } on Exception catch (e, s) {
-      apiLogs("PlaceDetails.fromMap Exception : $e\n$s");
+      print("PlaceDetails.fromMap Exception : $e\n$s");
     }
     return PlaceDetails.empty();
   }
@@ -87,16 +80,15 @@ class PlaceDetails {
         GoogleMapKeys.url: this.url,
         GoogleMapKeys.vicinity: this.vicinity,
         GoogleMapKeys.website: this.website,
-        GoogleMapKeys.photos: this.photos,
         GoogleMapKeys.weekdayText: this.weekdayText,
         GoogleMapKeys.types: this.types,
         GoogleMapKeys.location: this.location,
       };
 
   logPlaceDetails() {
-    appLogs("=======PlaceDetails=======");
+    print("=======PlaceDetails=======");
     this.toMap().forEach((k, v) {
-      apiLogs("$k : $v");
+      print("$k : $v");
     });
   }
 

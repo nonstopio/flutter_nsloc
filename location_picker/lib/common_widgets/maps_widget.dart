@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nsio_flutter/screens/location/google_maps_service.dart';
-import 'package:nsio_flutter/themes/app_theme.dart';
-import 'package:nsio_flutter/utils/sizes.dart';
+import 'package:location_picker/services/google_maps_service.dart';
+import 'package:location_picker/themes/app_textstyles.dart';
+import 'package:location_picker/utils/sizes.dart';
+
 
 class SelectPredictionWidget extends StatelessWidget {
   final PlacePrediction placePrediction;
