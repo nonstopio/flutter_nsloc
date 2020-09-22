@@ -19,8 +19,8 @@ dependencies:
   intl: ^0.16.1
 
   #LOCATION
-  geolocator: ^5.3.2+2
-  google_maps_flutter: ^0.5.30
+  geolocator: ^6.0.0+4
+  google_maps_flutter: ^0.5.32
 
   dio: ^3.0.10
   geopoint: ^0.7.1

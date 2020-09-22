@@ -1,4 +1,4 @@
-# location_picker
+# ns_google_map_location_picker
 
 Getting Started
 Get an API key at https://cloud.google.com/maps-platform/.
